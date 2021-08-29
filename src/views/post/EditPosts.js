@@ -21,7 +21,8 @@ class EditPosts extends Component {
         this.state = {
             title: "",
             content: "",
-            category: ""
+            category: "",
+            status :""
         }
     }
 
@@ -40,7 +41,7 @@ class EditPosts extends Component {
 
 
     handelChange = (event) => {
-        // console.log('data:', event.target.value);
+        // console.log('data event:', event.target.value);
         this.setState({
             [event.target.name] : event.target.value 
         })
