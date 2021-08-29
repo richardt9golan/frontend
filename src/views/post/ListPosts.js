@@ -42,7 +42,7 @@ class ListPosts extends Component {
     axios.get(`ci-rest/article`)
     .then(res => {
       const articles = res.data.data;
-      console.log('data res:',res.data);
+      
       this.setState({ articles });
     })
     .catch(error =>{
@@ -107,7 +107,7 @@ class ListPosts extends Component {
                                 'action':
                                   (item)=>(
                                     <td>
-                                        <CButton variant="ghost" color="success" to={"/edit/"+item.id}>
+                                        <CButton variant="ghost" color="success" to={"/edit?id="+item.id}>
                                           <CIcon name="cil-pencil" />
                                         </CButton>
                                         <CButton variant="ghost" color="danger">
@@ -149,7 +149,7 @@ class ListPosts extends Component {
                                 'action':
                                   (item)=>(
                                     <td>
-                                        <CButton variant="ghost" color="success" to={"/edit/"+item.id}>
+                                        <CButton variant="ghost" color="success" to={"/edit?id="+item.id}>
                                           <CIcon name="cil-pencil" />
                                         </CButton>
                                         <CButton variant="ghost" color="danger">
@@ -190,7 +190,7 @@ class ListPosts extends Component {
                                 'action':
                                   (item)=>(
                                     <td>
-                                        <CButton variant="ghost" color="success" to={"/edit/"+item.id}>
+                                        <CButton variant="ghost" color="success" to={"/edit?id="+item.id}>
                                           <CIcon name="cil-pencil" />
                                         </CButton>
                                         <CButton variant="ghost" color="danger">

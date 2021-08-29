@@ -12,6 +12,7 @@ import {
   CCardFooter
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import axios from 'axios'
 
 class EditPosts extends Component {
     constructor(props) {
@@ -22,6 +23,19 @@ class EditPosts extends Component {
             content: "",
             category: ""
         }
+    }
+
+    componentDidMount(){
+        const id = this.props.location.search
+        axios.get(`ci-rest/article`+id)
+        .then(res => {
+        const articles = res.data.data;
+            // console.log('data:', articles);
+        this.setState({ articles });
+        })
+        .catch(error =>{
+        console.log("Error",error);
+        })
     }
 
 
@@ -38,25 +52,27 @@ class EditPosts extends Component {
     }
     
     render(){
+        const {articles} = this.state
         return (
             <>
                 <CCard>
                 <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal" onSubmit={this.handelSubmit}>
-                    <CCardBody>
-                            <CFormGroup row>
-                                <CCol md="3">
-                                    <CLabel><h2>Edit Data Post</h2></CLabel>
-                                </CCol>
-                            </CFormGroup>
-                            <CFormGroup row>
-                                <CCol md="3">
-                                <CLabel htmlFor="title">Title</CLabel>
-                                </CCol>
-                                <CCol xs="12" md="9">
+                                {articles && articles.map((article, keys) =>(
+                                    <CCardBody key={keys}>
+                                    <CFormGroup row>
+                                        <CCol md="3">
+                                            <CLabel><h2>Edit Data Post</h2></CLabel>
+                                        </CCol>
+                                    </CFormGroup>
+                                    <CFormGroup row>
+                                        <CCol md="3">
+                                        <CLabel htmlFor="title">Title</CLabel>
+                                        </CCol>
+                                    <CCol xs="12" md="9" >
                                     <CInput 
                                         name="title" 
                                         placeholder="Title" 
-                                        value={this.title} 
+                                        value={article.title} 
                                         onChange={(event) =>  this.handelChange(event)}
                                     />
                                 </CCol>
@@ -70,7 +86,7 @@ class EditPosts extends Component {
                                     name="content"
                                     rows="9"
                                     placeholder="Content..."
-                                    value={this.content}
+                                    value={article.content}
                                     onChange={(event) =>  this.handelChange(event)} 
                                 />
                                 </CCol>
@@ -83,17 +99,18 @@ class EditPosts extends Component {
                                     <CInput
                                         name="category" 
                                         placeholder="Category" 
-                                        value={this.category}
+                                        value={article.category}
                                         onChange={(event) =>  this.handelChange(event)}
                                     />
                                 </CCol>
                             </CFormGroup>
-                        
                         </CCardBody>
+                         ))}
                         <CCardFooter>
                         <CButton type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
                         <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset</CButton>
                         </CCardFooter>
+                    
                     </CForm>
 
                 </CCard>
