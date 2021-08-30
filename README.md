@@ -1,3 +1,14 @@
+INSTALASI
+
+Pada file package.json
+di 
+"proxy" : "http://localhost:8080/",
+bisa di ubah ke
+"proxy" : "http://localhost/",
+
+agar tidak terkena CORS Error
+
+
 [![@coreui coreui](https://img.shields.io/badge/@coreui%20-coreui-lightgrey.svg?style=flat-square)](https://github.com/coreui/coreui)
 [![npm package][npm-coreui-badge]][npm-coreui]
 [![NPM downloads][npm-coreui-download]][npm-coreui]  
